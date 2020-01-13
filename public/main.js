@@ -2,8 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
 
   if (!Notification) {
-    alert('Desktop notifications not available in your browser so this site wont work, sorry. Please use a chromim browser');
+    alert('Desktop notifications not available in your browser so this site wont work, sorry. Please use a chromium based browser');
     return;
+  }
+
+  if(Notification.permission === "granted") {
+    hideButtons();
   }
 
   requestPermission();
@@ -48,7 +52,10 @@ const newNotification = (title, body, onshow) => {
 const requestPermission = () => {
   Notification.requestPermission().then(function (permission) {
     if (permission === "granted") {
-      new Notification("Thanks for granting permission!");
+      new Notification("Thanks for granting permission!", {
+        icon: "./glasses.png",
+        silent: true
+      });
       hideButtons();
     }
   });
@@ -66,5 +73,18 @@ const hideButtons = () => {
   const els = document.getElementsByClassName('notifications');
   for(let el of els) {
     el.style.display = 'none';
+  }
+}
+
+const toggleInfo = () => {
+  let infoDiv = document.getElementById("info");
+  let infoBtn = document.getElementById("infoBtn");
+  let infoBtnClose = document.getElementById("infoBtnClose");
+  if (infoDiv.classList.contains("hidden")) {
+    infoDiv.classList.remove("hidden");
+    infoBtnClose.focus();
+  } else {
+    infoDiv.classList.add("hidden");
+    infoBtn.focus();
   }
 }
