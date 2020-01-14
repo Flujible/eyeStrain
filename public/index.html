@@ -13,21 +13,28 @@
         <p>This site follows the 20-20-20 rule</p>
         <p>Every 20 minutes, look at something at least 20 feet away for 20 seconds</p>
         <div id="buttons">
-            <p class="notifications">You'll need to turn on notifications</p>
+            <p class="notifications">If you want to recieve notifications, you'll need to turn them on</p>
             <button id="notifications" class="btn notifications" onclick="requestPermissionBtn()">Turn on notifications</button>
         </div>
         <div id="infoBtnContainer">
             <button id="infoBtn" class="btn infoBtn" onclick="toggleInfo()">i</button>
         </div>
     </div>
-    <div id="info" class="hidden">
+    <div id="breakMsgContainerHidden">
+        <div class="breakMsg">
+            <h2>Take a break!</h2>
+            <p id="miniBreakMsg" class="hidden">Take a quick break, look away from the screen for 20 seconds</p>
+            <p id="breakMsg" class="hidden">Take a break, stretch your legs, come back in a few minutes</p>
+        </div>
+    </div>
+    <div id="info" class="offsetLeft">
         <h2>Eye Strain</h2>
         <p>Staring at a screen for too long is bad for your eyes so its important to take regular breaks.</p>
         <p>One strategy to help reduce eye strain is to use the 20-20-20 rule developed by Californian optometrist Jeffrey Anshel.</p>
         <p>The rule states that for every 20 minutes spent using a digital screen users should look at something 20 feet away for 20 seconds.</p>
         <p>This site will help you to adhere to this rule by giving you a desktop notification every 20 minutes. 
             On top of this, every hour you'll be prompted to take a slightly longer break where you should stretch your legs, as being sedentary for too long is also bad!</p>
-        <p>As long as this webpage is open on your computer you'll recieve the notifications and improve your optical health.</p>
+        <p>As long as this webpage is open on your computer you'll recieve the notifications or a visual cue to look away so you can improve your optical health.</p>
         <button onclick="toggleInfo()" id="infoBtnClose" class="btn infoBtn inverse"><img src="./cross.svg" alt="Close info"></button>
     </div>
 </body>

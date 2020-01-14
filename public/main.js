@@ -25,9 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
    
    
 const breakAlert = (mini) => {
-  if (Notification.permission !== 'granted')
-    requestPermissionBtn();
-  else {
+  if (Notification.permission === 'granted') {
     newNotification(
       mini ? "Mini break!" : "Take a break!", 
       mini ? "Take a quick break, look away from the screen for 20 seconds" : "Take a break, come back in a few minutes",
@@ -36,6 +34,13 @@ const breakAlert = (mini) => {
       }, mini ? 20000 : 300000)
     );
   }
+  toggleBreakMessage(mini,
+    () => {
+      setTimeout(() => {
+        toggleBreakMessage(mini);
+      }, mini ? miniBreakDuration : breakDuration)
+    }
+  )
 }
 
 const newNotification = (title, body, onshow) => {
@@ -86,5 +91,33 @@ const toggleInfo = () => {
   } else {
     infoDiv.classList.add("hidden");
     infoBtn.focus();
+  }
+}
+
+const toggleBreakMessage = (mini, callback) => {
+  console.log("toggle");
+  const breakMsgContainerDiv = document.getElementById("breakMsgContainer") || document.getElementById("breakMsgContainerHidden");
+  if(breakMsgContainerDiv.id === "breakMsgContainer") {
+    breakMsgContainerDiv.id = "breakMsgContainerHidden";
+  } else {
+    breakMsgContainerDiv.id = "breakMsgContainer"
+  }
+  if(mini) {
+    const miniBreakMsgDiv = document.getElementById('miniBreakMsg');
+    if(miniBreakMsgDiv.classList.contains('hidden')) {
+      miniBreakMsgDiv.classList.remove('hidden');
+    } else {
+      miniBreakMsgDiv.classList.add('hidden');
+    }
+  } else {
+    const breakMsgDiv = document.getElementById('breakMsg');
+    if(breakMsgDiv.classList.contains('hidden')) {
+      breakMsgDiv.classList.remove('hidden');
+    } else {
+      breakMsgDiv.classList.add('hidden');
+    }
+  }
+  if(callback) {
+    callback();
   }
 }
