@@ -7,6 +7,11 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+}
+
 p {
 	margin: 0;
 }
@@ -87,8 +92,7 @@ h1 {
 }
 
 #info h2 {
-	font-family: 'Poppins', sans-serif;
-	padding-top: 30px;
+	padding-top: 50px;
 }
 
 #info p {
