@@ -1,3 +1,13 @@
+const miniBreakTitle = "Mini break!";
+const breakTitle = "Take a break!";
+const miniBreakMsg = "Take a quick break, look away from the screen for 20 seconds";
+const breakMsg = "Take a break, stretch your legs, come back in a few minutes";
+const breakOverTitle = "Break over!";
+const breakOverMsg = "You can get back to work now";
+const miniBreakDuration = 20000;
+const breakDuration = 300000;
+const breakInterval = 1200000;
+
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
 
@@ -20,18 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
       count = 0;
       breakAlert(false);
     }
-  }, 1200000)
+  }, breakInterval)
 });
    
    
 const breakAlert = (mini) => {
   if (Notification.permission === 'granted') {
     newNotification(
-      mini ? "Mini break!" : "Take a break!", 
-      mini ? "Take a quick break, look away from the screen for 20 seconds" : "Take a break, come back in a few minutes",
+      mini ? miniBreakTitle : breakTitle, 
+      mini ? miniBreakMsg : breakMsg,
       setTimeout(() => {
-        newNotification("Break over", "You can get back to work now")
-      }, mini ? 20000 : 300000)
+        newNotification(breakOverTitle, breakOverMsg);
+      }, mini ? miniBreakDuration : breakDuration)
     );
   }
   toggleBreakMessage(mini,
