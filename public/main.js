@@ -95,11 +95,11 @@ const toggleInfo = () => {
   let infoDiv = document.getElementById("info");
   let infoBtn = document.getElementById("infoBtn");
   let infoBtnClose = document.getElementById("infoBtnClose");
-  if (infoDiv.classList.contains("hidden")) {
-    infoDiv.classList.remove("hidden");
+  if (infoDiv.classList.contains("offsetLeft")) {
+    infoDiv.classList.remove("offsetLeft");
     infoBtnClose.focus();
   } else {
-    infoDiv.classList.add("hidden");
+    infoDiv.classList.add("offsetLeft");
     infoBtn.focus();
   }
 }

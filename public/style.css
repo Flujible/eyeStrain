@@ -80,7 +80,7 @@ h1 {
 	transition: left 0.25s;
 }
 
-#info.hidden {
+#info.offsetLeft {
 	left: -352px;
 }
 
