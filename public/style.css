@@ -38,6 +38,11 @@ p {
 	margin-top: 1em;
 }
 
+#notificationsOffMsg {
+	margin-top: 1em;
+	font-weight: bolder;
+}
+
 .btn {
 	font-size: 1em;
 	margin-top: 10px;

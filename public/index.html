@@ -12,6 +12,9 @@
         <h1>Reduce your eye strain</h1>
         <p>This site follows the 20-20-20 rule</p>
         <p>Every 20 minutes, look at something at least 20 feet away for 20 seconds</p>
+        <div id="notificationsOffMsg" class="hidden">
+            <p class="notificationSetting">Desktop notifications have been disabled in the settings</p>
+        </div>
         <div id="buttons">
             <p class="notifications">If you want to recieve notifications, you'll need to turn them on</p>
             <button id="notifications" class="btn notifications" onclick="requestPermissionBtn()">Turn on notifications</button>
@@ -60,11 +63,11 @@
             <fieldset>
                 <legend>Desktop notifications</legend>
                 <label for="notificationsOn">
-                    <input type="radio" id="notificationsOn" name="Notifications" value="on" checked>
+                    <input type="radio" id="notificationsOn" name="Notifications" value="on" checked onclick="handleNotificationsClick(true)">
                     <span>On</span>
                 </label>
                 <label for="notificationsOff">
-                    <input type="radio" id="notificationsOff" name="Notifications" value="off">
+                    <input type="radio" id="notificationsOff" name="Notifications" value="off" onclick="handleNotificationsClick(false)">
                     <span>Off</span>
                 </label>
             </fieldset>

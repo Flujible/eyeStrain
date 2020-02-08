@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if(Notification.permission === "granted") {
-    hideButtons();
+    togglePermissionButton(false);
   }
 
   requestPermission();
@@ -71,7 +71,7 @@ const requestPermission = () => {
         icon: "./glasses.png",
         silent: true
       });
-      hideButtons();
+      togglePermissionButton(false);
     }
   });
 }
@@ -84,10 +84,24 @@ const requestPermissionBtn = () => {
   }
 }
 
-const hideButtons = () => {
+const togglePermissionButton = (show) => {
   const els = document.getElementsByClassName('notifications');
-  for(let el of els) {
-    el.style.display = 'none';
+  if (show !== undefined) {
+    for(let el of els) {
+        if (show === true) {
+          el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
+  } else {
+    for(let el of els) {
+      if (el.classList.value.includes("hidden")) {
+        el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
   }
 }
 
@@ -137,5 +151,30 @@ const handleAnimationClick = (value) => {
     body.classList.add("animated");
   } else if (!value && body.classList.value === "animated") {
     body.classList.remove("animated");
+  }
+}
+
+const handleNotificationsClick = (on) => {
+  const msg = document.getElementById("notificationsOffMsg");
+  if (on) {
+    // Radio button set to on
+    // Toggle browser permission buttons on IF they have granted permission
+    if (Notification.permission === "granted") {
+      togglePermissionButton(false);
+    } else {
+      togglePermissionButton(true);
+    }
+    // Hide 'disabled in settings' message
+    if (msg.classList.value !== "hidden") {
+      msg.classList.add("hidden")
+    }
+  } else {
+    // Radio button set to off
+    // Always hide the browser settings message because it is now irrelevant
+    togglePermissionButton(false);
+    // Show 'disabled in settings' message
+    if (msg.classList.value === "hidden") {
+      msg.classList.remove("hidden")
+    }
   }
 }
