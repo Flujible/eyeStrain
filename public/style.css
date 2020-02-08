@@ -51,20 +51,25 @@ p {
 	color: black;
 }
 
+.btn#settingsBtn:hover img, .btn#settingsBtn:focus img {
+	filter: invert(1);
+	animation: cogSpin 0.5s ease;
+}
+
 h1 {
 	margin: 0 0 0.67em 0;
 	font-family: 'Poppins', sans-serif;
 	font-size: 3em;
 }
 
-#infoBtnContainer {
+.btnContainer {
 	position: absolute;
 	bottom: 25px;
 	left: 25px;
 	z-index: 1;
 }
 
-.infoBtn {
+.infoBtn, .closeBtn {
 	font-family: consolas;
 	font-size: 1.5em;
 	font-weight: bold;
@@ -73,7 +78,11 @@ h1 {
 	border-radius: 50%;
 }
 
-#info {
+#infoPanel {
+	overflow-y: auto;
+}
+
+.panel {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -87,28 +96,28 @@ h1 {
 	transition: left 0.25s;
 }
 
-#info.offsetLeft {
+.panel.offsetLeft {
 	left: -352px;
 }
 
-#info h2 {
+.panel h2 {
 	padding-top: 50px;
 }
 
-#info p {
+.panel p {
 	padding-top: 15px;
 }
 
-.infoBtn.inverse {
+.closeBtn.inverse {
 	border: 1px solid black;
 	color: black;
 }
 
-.infoBtn.inverse:hover, .infoBtn.inverse:focus {
+.closeBtn.inverse:hover, .closeBtn.inverse:focus {
 	filter: invert(1);
 }
 
-#infoBtnClose {
+.closeBtn {
 	position: absolute;
 	top: 32px;
 	left: 270px;
@@ -134,6 +143,22 @@ h1 {
 	display: none;
 }
 
+#settingsBtn {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: absolute;
+	margin-left: 10px;
+}
+
+#settingsBtn img {
+	width: 25px;
+	height: 25px;
+	color: white;
+	position: relative;
+	left: -3px;
+}
+
 .breakMsg {
 	color: black;
 	background-color: white;
@@ -147,6 +172,62 @@ h1 {
 	padding-bottom: 10px;
 }
 
+.settingsContent {
+	margin-top:10px;
+}
+
+fieldset {
+	border: 1px solid #000;
+	border-radius: 0.25em;
+	margin-top: 20px;
+	padding: 15px 15px;
+}
+
+fieldset legend {
+	padding: 0.25em 0.75em;
+}
+
+fieldset label {
+	margin-right: 20px;
+}
+
+[type="radio"] {
+	border: 0; 
+	clip: rect(0 0 0 0); 
+	height: 1px; 
+	width: 1px;
+	overflow: hidden; 
+	position: absolute; 
+}
+
+[type="radio"] + span {
+	margin: 3px;
+	padding: 5px;
+}
+
+[type="radio"] + span:before {
+	content: '';
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.25em;
+	border-radius: 1em;
+	border: 0.125em solid #fff;
+	box-shadow: 0 0 0 0.15em #000;
+	margin-right: 0.75em;
+	transition: 0.5s ease all;
+}
+
+[type="radio"]:checked + span:before {
+	background: #23a6d5	;
+	box-shadow: 0 0 0 0.25em #000;
+}
+
+[type="radio"]:focus + span {
+	content: '';
+	outline: dotted;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -156,5 +237,14 @@ h1 {
 	}
 	100% {
 		background-position: 0% 50%;
+	}
+}
+
+@keyframes cogSpin {
+	0% {
+		transform: rotate(0deg)
+	}
+	100% {
+		transform: rotate(60deg)
 	}
 }

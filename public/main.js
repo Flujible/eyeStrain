@@ -8,6 +8,11 @@ const miniBreakDuration = 20000;
 const breakDuration = 300000;
 const breakInterval = 1200000;
 
+const state = {
+  animations: true,
+  desktopNotifications: true
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
 
@@ -91,16 +96,30 @@ const hideButtons = () => {
   }
 }
 
-const toggleInfo = () => {
-  let infoDiv = document.getElementById("info");
-  let infoBtn = document.getElementById("infoBtn");
-  let infoBtnClose = document.getElementById("infoBtnClose");
-  if (infoDiv.classList.contains("offsetLeft")) {
-    infoDiv.classList.remove("offsetLeft");
-    infoBtnClose.focus();
+// const toggleInfo = () => {
+//   let infoDiv = document.getElementById("infoPanel");
+//   let infoBtn = document.getElementById("infoBtn");
+//   let closeBtn = document.getElementById("closeBtn");
+//   if (infoDiv.classList.contains("offsetLeft")) {
+//     infoDiv.classList.remove("offsetLeft");
+//     closeBtn.focus();
+//   } else {
+//     infoDiv.classList.add("offsetLeft");
+//     infoBtn.focus();
+//   }
+// }
+
+const togglePanel = (panel) => {
+  let div = document.getElementById(panel === "info" ? "infoPanel" : "settingsPanel");
+  let triggerBtn = document.getElementById(panel === "info" ? "infoBtn" : "settingsBtn");
+  let closeBtn = document.getElementById(panel === "info" ? "infoCloseBtn" : "settingsCloseBtn");
+  console.log(closeBtn)
+  if (div.classList.contains("offsetLeft")) {
+    div.classList.remove("offsetLeft");
+    closeBtn.focus();
   } else {
-    infoDiv.classList.add("offsetLeft");
-    infoBtn.focus();
+    div.classList.add("offsetLeft");
+    triggerBtn.focus();
   }
 }
 
