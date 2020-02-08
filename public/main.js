@@ -96,19 +96,6 @@ const hideButtons = () => {
   }
 }
 
-// const toggleInfo = () => {
-//   let infoDiv = document.getElementById("infoPanel");
-//   let infoBtn = document.getElementById("infoBtn");
-//   let closeBtn = document.getElementById("closeBtn");
-//   if (infoDiv.classList.contains("offsetLeft")) {
-//     infoDiv.classList.remove("offsetLeft");
-//     closeBtn.focus();
-//   } else {
-//     infoDiv.classList.add("offsetLeft");
-//     infoBtn.focus();
-//   }
-// }
-
 const togglePanel = (panel) => {
   let div = document.getElementById(panel === "info" ? "infoPanel" : "settingsPanel");
   let triggerBtn = document.getElementById(panel === "info" ? "infoBtn" : "settingsBtn");
