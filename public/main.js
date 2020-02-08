@@ -8,11 +8,6 @@ const miniBreakDuration = 20000;
 const breakDuration = 300000;
 const breakInterval = 1200000;
 
-const state = {
-  animations: true,
-  desktopNotifications: true
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
 
@@ -100,7 +95,6 @@ const togglePanel = (panel) => {
   let div = document.getElementById(panel === "info" ? "infoPanel" : "settingsPanel");
   let triggerBtn = document.getElementById(panel === "info" ? "infoBtn" : "settingsBtn");
   let closeBtn = document.getElementById(panel === "info" ? "infoCloseBtn" : "settingsCloseBtn");
-  console.log(closeBtn)
   if (div.classList.contains("offsetLeft")) {
     div.classList.remove("offsetLeft");
     closeBtn.focus();
@@ -111,7 +105,6 @@ const togglePanel = (panel) => {
 }
 
 const toggleBreakMessage = (mini, callback) => {
-  console.log("toggle");
   const breakMsgContainerDiv = document.getElementById("breakMsgContainer") || document.getElementById("breakMsgContainerHidden");
   if(breakMsgContainerDiv.id === "breakMsgContainer") {
     breakMsgContainerDiv.id = "breakMsgContainerHidden";
@@ -135,5 +128,14 @@ const toggleBreakMessage = (mini, callback) => {
   }
   if(callback) {
     callback();
+  }
+}
+
+const handleAnimationClick = (value) => {
+  const body = document.getElementsByTagName("body")[0];
+  if (value && body.classList.value !== "animated") {
+    body.classList.add("animated");
+  } else if (!value && body.classList.value === "animated") {
+    body.classList.remove("animated");
   }
 }

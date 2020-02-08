@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins" rel="stylesheet">
     <title>Eye Strain</title>
 </head>
-<body>
+<body class="animated">
     <div id="mainContent">
         <h1>Reduce your eye strain</h1>
         <p>This site follows the 20-20-20 rule</p>
@@ -47,13 +47,13 @@
         <button onclick="togglePanel('settings')" id="settingsCloseBtn" class="btn closeBtn inverse"><img src="./cross.svg" alt="Close info"></button>
         <div class="settingsContent">
             <fieldset>
-                <legend>Animations</legend>
+                <legend>Background animation</legend>
                 <label for="animationsOn">
-                    <input type="radio" id="animationsOn" name="Animations" value="on" checked>
+                    <input type="radio" id="animationsOn" name="Animations" value="on" checked onclick="handleAnimationClick(true)">
                     <span>On</span>
                 </label>
                 <label for="animationsOff">
-                    <input type="radio" id="animationsOff" name="Animations" value="off">
+                    <input type="radio" id="animationsOff" name="Animations" value="off" onclick="handleAnimationClick(false)">
                     <span>Off</span>
                 </label>
             </fieldset>
