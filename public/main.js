@@ -7,6 +7,7 @@ const breakOverMsg = "You can get back to work now";
 const miniBreakDuration = 20000;
 const breakDuration = 300000;
 const breakInterval = 1200000;
+let desktopNotificationsAllowed = true;
 
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if(Notification.permission === "granted") {
-    hideButtons();
+    togglePermissionButton(false);
   }
 
   requestPermission();
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
    
    
 const breakAlert = (mini) => {
-  if (Notification.permission === 'granted') {
+  if (Notification.permission === 'granted' && desktopNotificationsAllowed) {
     newNotification(
       mini ? miniBreakTitle : breakTitle, 
       mini ? miniBreakMsg : breakMsg,
@@ -65,15 +66,14 @@ const newNotification = (title, body, onshow) => {
 }
 
 const requestPermission = () => {
-  Notification.requestPermission().then(function (permission) {
-    if (permission === "granted") {
-      new Notification("Thanks for granting permission!", {
-        icon: "./glasses.png",
-        silent: true
-      });
-      hideButtons();
-    }
-  });
+  if (desktopNotificationsAllowed) {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        newNotification("Thanks for granting permission", "You wont regret it!");
+        togglePermissionButton(false);
+      }
+    });
+  }
 }
 
 const requestPermissionBtn = () => {
@@ -84,10 +84,24 @@ const requestPermissionBtn = () => {
   }
 }
 
-const hideButtons = () => {
+const togglePermissionButton = (show) => {
   const els = document.getElementsByClassName('notifications');
-  for(let el of els) {
-    el.style.display = 'none';
+  if (show !== undefined) {
+    for(let el of els) {
+        if (show === true) {
+          el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
+  } else {
+    for(let el of els) {
+      if (el.classList.value.includes("hidden")) {
+        el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
   }
 }
 
@@ -137,5 +151,33 @@ const handleAnimationClick = (value) => {
     body.classList.add("animated");
   } else if (!value && body.classList.value === "animated") {
     body.classList.remove("animated");
+  }
+}
+
+const handleNotificationsClick = (on) => {
+  desktopNotificationsAllowed = on;
+  const msg = document.getElementById("notificationsOffMsg");
+  if (on) {
+    // Radio button set to on
+    // Toggle browser permission buttons on IF they have granted permission
+    if (Notification.permission === "granted") {
+      togglePermissionButton(false);
+    } else {
+      togglePermissionButton(true);
+    }
+    // Hide 'disabled in settings' message
+    if (msg.classList.value !== "hidden") {
+      msg.classList.add("hidden")
+    }
+    // Trigger confirmation message
+    newNotification("Notifications re-enabled", "You have re-enabled notifications");
+  } else {
+    // Radio button set to off
+    // Always hide the browser settings message because it is now irrelevant
+    togglePermissionButton(false);
+    // Show 'disabled in settings' message
+    if (msg.classList.value === "hidden") {
+      msg.classList.remove("hidden")
+    }
   }
 }
