@@ -7,6 +7,7 @@ const breakOverMsg = "You can get back to work now";
 const miniBreakDuration = 20000;
 const breakDuration = 300000;
 const breakInterval = 1200000;
+let desktopNotificationsAllowed = true;
 
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
    
    
 const breakAlert = (mini) => {
-  if (Notification.permission === 'granted') {
+  if (Notification.permission === 'granted' && desktopNotificationsAllowed) {
     newNotification(
       mini ? miniBreakTitle : breakTitle, 
       mini ? miniBreakMsg : breakMsg,
@@ -65,15 +66,14 @@ const newNotification = (title, body, onshow) => {
 }
 
 const requestPermission = () => {
-  Notification.requestPermission().then(function (permission) {
-    if (permission === "granted") {
-      new Notification("Thanks for granting permission!", {
-        icon: "./glasses.png",
-        silent: true
-      });
-      togglePermissionButton(false);
-    }
-  });
+  if (desktopNotificationsAllowed) {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        newNotification("Thanks for granting permission", "You wont regret it!");
+        togglePermissionButton(false);
+      }
+    });
+  }
 }
 
 const requestPermissionBtn = () => {
@@ -155,6 +155,7 @@ const handleAnimationClick = (value) => {
 }
 
 const handleNotificationsClick = (on) => {
+  desktopNotificationsAllowed = on;
   const msg = document.getElementById("notificationsOffMsg");
   if (on) {
     // Radio button set to on
@@ -168,6 +169,8 @@ const handleNotificationsClick = (on) => {
     if (msg.classList.value !== "hidden") {
       msg.classList.add("hidden")
     }
+    // Trigger confirmation message
+    newNotification("Notifications re-enabled", "You have re-enabled notifications");
   } else {
     // Radio button set to off
     // Always hide the browser settings message because it is now irrelevant
