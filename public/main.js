@@ -1,3 +1,4 @@
+const notificationAudio = new Audio('notification.mp3');
 const miniBreakTitle = "Mini break!";
 const breakTitle = "Take a break!";
 const miniBreakMsg = "Take a quick break, look away from the screen for 20 seconds";
@@ -8,6 +9,7 @@ const miniBreakDuration = 20000;
 const breakDuration = 300000;
 const breakInterval = 1200000;
 let desktopNotificationsAllowed = true;
+let soundsAllowed = true;
 
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
@@ -36,14 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
    
    
 const breakAlert = (mini) => {
-  if (Notification.permission === 'granted' && desktopNotificationsAllowed) {
-    newNotification(
-      mini ? miniBreakTitle : breakTitle, 
-      mini ? miniBreakMsg : breakMsg,
-      setTimeout(() => {
-        newNotification(breakOverTitle, breakOverMsg);
-      }, mini ? miniBreakDuration : breakDuration)
-    );
+  if (Notification.permission === 'granted') {
+    if (desktopNotificationsAllowed) {
+      newNotification(
+        mini ? miniBreakTitle : breakTitle,
+        mini ? miniBreakMsg : breakMsg,
+        setTimeout(() => {
+          newNotification(breakOverTitle, breakOverMsg);
+          if (soundsAllowed) {
+            notificationAudio.play();
+          }
+        }, mini ? miniBreakDuration : breakDuration)
+      );
+    }
+    if (soundsAllowed) {
+      notificationAudio.play();
+    }
   }
   toggleBreakMessage(mini,
     () => {
@@ -180,4 +190,8 @@ const handleNotificationsClick = (on) => {
       msg.classList.remove("hidden")
     }
   }
+}
+
+const handleSoundsClick = (on) => {
+  soundsAllowed = on;
 }

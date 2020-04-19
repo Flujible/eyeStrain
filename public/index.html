@@ -71,7 +71,20 @@
                     <span>Off</span>
                 </label>
             </fieldset>
+            <fieldset>
+                <legend>Sounds</legend>
+                <label for="soundsOn">
+                    <input type="radio" id="soundsOn" name="Sounds" value="on" checked onclick="handleSoundsClick(true)">
+                    <span>On</span>
+                </label>
+                <label for="soundsOff">
+                    <input type="radio" id="soundsOff" name="Sounds" value="off" onclick="handleSoundsClick(false)">
+                    <span>Off</span>
+                </label>
+            </fieldset>
         </div>
+        <p>Please note: Sounds may not play until until the user has clicked or tapped on the page.
+        </p>
     </div>
 </body>
 </html> 
