@@ -45,15 +45,18 @@ const breakAlert = (mini) => {
         mini ? miniBreakMsg : breakMsg,
         setTimeout(() => {
           newNotification(breakOverTitle, breakOverMsg);
-          if (soundsAllowed) {
-            notificationAudio.play();
-          }
         }, mini ? miniBreakDuration : breakDuration)
       );
     }
     if (soundsAllowed) {
       notificationAudio.play();
     }
+    setTimeout(() => {
+      // Check user hasn't disabled sounds mid-break
+      if (soundsAllowed) {
+        notificationAudio.play();
+      }
+    }, mini ? miniBreakDuration : breakDuration)
   }
   toggleBreakMessage(mini,
     () => {
