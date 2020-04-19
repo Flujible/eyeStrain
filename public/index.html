@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -7,17 +8,25 @@
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins" rel="stylesheet">
     <title>Eye Strain</title>
 </head>
+
 <body class="animated">
     <div id="mainContent">
         <h1>Reduce your eye strain</h1>
         <p>This site follows the 20-20-20 rule</p>
         <p>Every 20 minutes, look at something at least 20 feet away for 20 seconds</p>
+        <div id="countdown">
+            <div id="countdown-number"></div>
+            <svg>
+              <circle r="53" cx="75" cy="75"></circle>
+            </svg>
+        </div>
         <div id="notificationsOffMsg" class="hidden">
             <p class="notificationSetting">Desktop notifications have been disabled in the settings</p>
         </div>
         <div id="buttons">
             <p class="notifications">If you want to recieve notifications, you'll need to turn them on</p>
-            <button id="notifications" class="btn notifications" onclick="requestPermissionBtn()">Turn on notifications</button>
+            <button id="notifications" class="btn notifications" onclick="requestPermissionBtn()">Turn on
+                notifications</button>
         </div>
         <div class="btnContainer">
             <button id="infoBtn" class="btn infoBtn" onclick="togglePanel('info')">i</button>
@@ -37,33 +46,42 @@
         <div id="infoPanelContent">
             <h2>Eye Strain</h2>
             <p>Staring at a screen for too long is bad for your eyes so its important to take regular breaks.</p>
-            <p>One strategy to help reduce eye strain is to use the 20-20-20 rule developed by Californian optometrist Jeffrey Anshel.</p>
-            <p>The rule states that for every 20 minutes spent using a digital screen users should look at something 20 feet away for 20 seconds.</p>
-            <p>This site will help you to adhere to this rule by giving you a desktop notification every 20 minutes. 
-                On top of this, every hour you'll be prompted to take a slightly longer break where you should stretch your legs, as being sedentary for too long is also bad!</p>
-            <p>As long as this webpage is open on your computer you'll recieve the notifications or a visual cue to look away so you can improve your optical health.</p>
+            <p>One strategy to help reduce eye strain is to use the 20-20-20 rule developed by Californian optometrist
+                Jeffrey Anshel.</p>
+            <p>The rule states that for every 20 minutes spent using a digital screen users should look at something 20
+                feet away for 20 seconds.</p>
+            <p>This site will help you to adhere to this rule by giving you a desktop notification every 20 minutes.
+                On top of this, every hour you'll be prompted to take a slightly longer break where you should stretch
+                your legs, as being sedentary for too long is also bad!</p>
+            <p>As long as this webpage is open on your computer you'll recieve the notifications or a visual cue to look
+                away so you can improve your optical health.</p>
         </div>
-        <button onclick="togglePanel('info')" id="infoCloseBtn" class="btn closeBtn inverse"><img src="./cross.svg" alt="Close info"></button>
+        <button onclick="togglePanel('info')" id="infoCloseBtn" class="btn closeBtn inverse"><img src="./cross.svg"
+                alt="Close info"></button>
     </div>
     <div id="settingsPanel" class="panel offsetLeft">
         <h2>Settings</h2>
-        <button onclick="togglePanel('settings')" id="settingsCloseBtn" class="btn closeBtn inverse"><img src="./cross.svg" alt="Close info"></button>
+        <button onclick="togglePanel('settings')" id="settingsCloseBtn" class="btn closeBtn inverse"><img
+                src="./cross.svg" alt="Close info"></button>
         <div class="settingsContent">
             <fieldset>
                 <legend>Background animation</legend>
                 <label for="animationsOn">
-                    <input type="radio" id="animationsOn" name="Animations" value="on" checked onclick="handleAnimationClick(true)">
+                    <input type="radio" id="animationsOn" name="Animations" value="on" checked
+                        onclick="handleAnimationClick(true)">
                     <span>On</span>
                 </label>
                 <label for="animationsOff">
-                    <input type="radio" id="animationsOff" name="Animations" value="off" onclick="handleAnimationClick(false)">
+                    <input type="radio" id="animationsOff" name="Animations" value="off"
+                        onclick="handleAnimationClick(false)">
                     <span>Off</span>
                 </label>
             </fieldset>
             <fieldset>
                 <legend>Overlay notifications</legend>
                 <label for="overlayOn">
-                    <input type="radio" id="overlayOn" name="Overlay" value="on" checked onclick="handleOverlayClick(true)">
+                    <input type="radio" id="overlayOn" name="Overlay" value="on" checked
+                        onclick="handleOverlayClick(true)">
                     <span>On</span>
                 </label>
                 <label for="overlayOff">
@@ -74,18 +92,21 @@
             <fieldset>
                 <legend>Desktop notifications</legend>
                 <label for="notificationsOn">
-                    <input type="radio" id="notificationsOn" name="Notifications" value="on" checked onclick="handleNotificationsClick(true)">
+                    <input type="radio" id="notificationsOn" name="Notifications" value="on" checked
+                        onclick="handleNotificationsClick(true)">
                     <span>On</span>
                 </label>
                 <label for="notificationsOff">
-                    <input type="radio" id="notificationsOff" name="Notifications" value="off" onclick="handleNotificationsClick(false)">
+                    <input type="radio" id="notificationsOff" name="Notifications" value="off"
+                        onclick="handleNotificationsClick(false)">
                     <span>Off</span>
                 </label>
             </fieldset>
             <fieldset>
                 <legend>Sounds</legend>
                 <label for="soundsOn">
-                    <input type="radio" id="soundsOn" name="Sounds" value="on" checked onclick="handleSoundsClick(true)">
+                    <input type="radio" id="soundsOn" name="Sounds" value="on" checked
+                        onclick="handleSoundsClick(true)">
                     <span>On</span>
                 </label>
                 <label for="soundsOff">
@@ -98,4 +119,5 @@
         </p>
     </div>
 </body>
-</html> 
+
+</html>

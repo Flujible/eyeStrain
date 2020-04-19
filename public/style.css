@@ -1,4 +1,3 @@
-
 body {
 	margin: 0;
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -182,7 +181,44 @@ h1 {
 }
 
 .settingsContent {
-	margin-top:10px;
+	margin-top: 10px;
+}
+
+#countdown-number {
+	position: absolute;
+	top: 55px;
+	left: 55px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	color: white;
+	display: inline-block;
+	line-height: 40px;
+}
+
+#countdown {
+	position: relative;
+	height: 150px;
+	width: 150px;
+	margin-top: 30px;
+}
+
+#countdown svg {
+	top: 0;
+	right: 0;
+	width: 150px;
+	height: 150px;
+	transform: rotateZ(-90deg);
+}
+
+#countdown svg circle {
+	stroke-dasharray: 333 333;
+	stroke-dashoffset: 0px;
+	stroke-linecap: round;
+	stroke-width: 4px;
+	stroke: white;
+	fill: none;
+	animation: countdown 1200s linear infinite forwards;
 }
 
 fieldset {
@@ -201,20 +237,20 @@ fieldset label {
 }
 
 [type="radio"] {
-	border: 0; 
-	clip: rect(0 0 0 0); 
-	height: 1px; 
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
 	width: 1px;
-	overflow: hidden; 
-	position: absolute; 
+	overflow: hidden;
+	position: absolute;
 }
 
-[type="radio"] + span {
+[type="radio"]+span {
 	margin: 3px;
 	padding: 5px;
 }
 
-[type="radio"] + span:before {
+[type="radio"]+span:before {
 	content: '';
 	display: inline-block;
 	width: 1em;
@@ -227,12 +263,12 @@ fieldset label {
 	transition: 0.5s ease all;
 }
 
-[type="radio"]:checked + span:before {
-	background: #23a6d5	;
+[type="radio"]:checked+span:before {
+	background: #23a6d5;
 	box-shadow: 0 0 0 0.25em #000;
 }
 
-[type="radio"]:focus + span {
+[type="radio"]:focus+span {
 	content: '';
 	outline: dotted;
 }
@@ -255,5 +291,14 @@ fieldset label {
 	}
 	100% {
 		transform: rotate(60deg)
+	}
+}
+
+@keyframes countdown {
+	from {
+		stroke-dashoffset: 0px;
+	}
+	to {
+		stroke-dashoffset: 333px;
 	}
 }
