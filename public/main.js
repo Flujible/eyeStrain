@@ -5,11 +5,13 @@ const miniBreakMsg = "Take a quick break, look away from the screen for 20 secon
 const breakMsg = "Take a break, stretch your legs, come back in a few minutes";
 const breakOverTitle = "Break over!";
 const breakOverMsg = "You can get back to work now";
-const miniBreakDuration = 20000;
-const breakDuration = 300000;
-const breakInterval = 1200000;
+const miniBreakDuration = 3000;
+const breakDuration = 5000;
+const breakInterval = 10000;
+let breakInProgress = false;
 let desktopNotificationsAllowed = true;
 let soundsAllowed = true;
+let overlayAllowed = true;
 
 document.addEventListener('DOMContentLoaded', () => {
   let count = 0;
@@ -38,6 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
    
    
 const breakAlert = (mini) => {
+  const timeoutLength = mini ? miniBreakDuration : breakDuration
+
+  // Used to determine whether to add overlay when toggled mid break
+  breakInProgress = true;
+  setTimeout(() => {
+    breakInProgress = false;
+  }, timeoutLength);
+
   if (Notification.permission === 'granted') {
     if (desktopNotificationsAllowed) {
       newNotification(
@@ -45,26 +55,28 @@ const breakAlert = (mini) => {
         mini ? miniBreakMsg : breakMsg,
         setTimeout(() => {
           newNotification(breakOverTitle, breakOverMsg);
-        }, mini ? miniBreakDuration : breakDuration)
+        }, timeoutLength)
       );
     }
-    if (soundsAllowed) {
-      notificationAudio.play();
-    }
-    setTimeout(() => {
-      // Check user hasn't disabled sounds mid-break
-      if (soundsAllowed) {
-        notificationAudio.play();
-      }
-    }, mini ? miniBreakDuration : breakDuration)
   }
+
   toggleBreakMessage(mini,
     () => {
       setTimeout(() => {
         toggleBreakMessage(mini);
-      }, mini ? miniBreakDuration : breakDuration)
+      }, timeoutLength)
     }
   )
+
+  if (soundsAllowed) {
+    notificationAudio.play();
+  }
+  setTimeout(() => {
+    // Check user hasn't disabled sounds mid-break
+    if (soundsAllowed) {
+      notificationAudio.play();
+    }
+  }, timeoutLength)
 }
 
 const newNotification = (title, body, onshow) => {
@@ -135,7 +147,7 @@ const toggleBreakMessage = (mini, callback) => {
   const breakMsgContainerDiv = document.getElementById("breakMsgContainer") || document.getElementById("breakMsgContainerHidden");
   if(breakMsgContainerDiv.id === "breakMsgContainer") {
     breakMsgContainerDiv.id = "breakMsgContainerHidden";
-  } else {
+  } else if (overlayAllowed) {
     breakMsgContainerDiv.id = "breakMsgContainer"
   }
   if(mini) {
@@ -197,4 +209,21 @@ const handleNotificationsClick = (on) => {
 
 const handleSoundsClick = (on) => {
   soundsAllowed = on;
+}
+
+const handleOverlayClick = (on) => {
+  overlayAllowed = on;
+  // Remove overlay if turned off during break
+  const breakMsgContainerDiv = document.getElementById("breakMsgContainer") || document.getElementById("breakMsgContainerHidden");
+  if (!overlayAllowed) {
+    if (breakMsgContainerDiv.id === "breakMsgContainer") {
+      breakMsgContainerDiv.id = "breakMsgContainerHidden"
+    }
+  }
+  // Add overlay if turned on during break
+  if (overlayAllowed && breakInProgress) {
+    if (breakMsgContainerDiv.id === "breakMsgContainerHidden") {
+      breakMsgContainerDiv.id = "breakMsgContainer"
+    }
+  }
 }

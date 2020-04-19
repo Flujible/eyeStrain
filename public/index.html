@@ -61,6 +61,17 @@
                 </label>
             </fieldset>
             <fieldset>
+                <legend>Overlay notifications</legend>
+                <label for="overlayOn">
+                    <input type="radio" id="overlayOn" name="Overlay" value="on" checked onclick="handleOverlayClick(true)">
+                    <span>On</span>
+                </label>
+                <label for="overlayOff">
+                    <input type="radio" id="overlayOff" name="Overlay" value="off" onclick="handleOverlayClick(false)">
+                    <span>Off</span>
+                </label>
+            </fieldset>
+            <fieldset>
                 <legend>Desktop notifications</legend>
                 <label for="notificationsOn">
                     <input type="radio" id="notificationsOn" name="Notifications" value="on" checked onclick="handleNotificationsClick(true)">
