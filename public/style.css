@@ -57,6 +57,11 @@ p {
 .btn:hover, .btn:focus {
 	background-color: white;
 	color: black;
+	outline: none;
+}
+
+.btn#settingsBtn:focus {
+	outline: none;
 }
 
 .btn#settingsBtn:hover img, .btn#settingsBtn:focus img {
