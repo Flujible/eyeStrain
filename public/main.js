@@ -37,7 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, breakInterval)
 
-  const countdownNumberEl = document.getElementById('countdown-number');
+  const countdownTitle = document.getElementById("countdownTitle");
+  countdownTitle.textContent = "20 minutes remaining before your next break";
+
+  const countdownNumberEl = document.getElementById('countdownNumber');
   let countdown = breakInterval/60000;
 
   countdownNumberEl.textContent = `${countdown}m`;
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(function () {
     countdown = --countdown <= 0 ? breakInterval/60000 : countdown;
     countdownNumberEl.textContent = `${countdown}m`;
+    countdownTitle.textContent = `${countdown} minutes remaining before your next break`;
   }, 60000);
 });
 
@@ -234,6 +238,21 @@ const handleOverlayClick = (on) => {
   if (overlayAllowed && breakInProgress) {
     if (breakMsgContainerDiv.id === "breakMsgContainerHidden") {
       breakMsgContainerDiv.id = "breakMsgContainer"
+    }
+  }
+}
+
+const handleTimerClick = (on) => {
+  const timerContainerDiv = document.getElementById('countdown')
+  if (on) {
+    if (timerContainerDiv.classList.contains("protectedHidden")) {
+      timerContainerDiv.classList.remove("protectedHidden")
+      timerContainerDiv.setAttribute("aria-hidden", false);
+    }
+  } else {
+    if (!timerContainerDiv.classList.contains("protectedHidden")) {
+      timerContainerDiv.classList.add("protectedHidden");
+      timerContainerDiv.setAttribute("aria-hidden",true);
     }
   }
 }

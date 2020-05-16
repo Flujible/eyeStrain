@@ -140,6 +140,11 @@ h1 {
 	display: none;
 }
 
+.protectedHidden {
+	position: absolute;
+	left: -9999px;
+}
+
 #breakMsgContainer {
 	width: 100vw;
 	height: 100vh;
@@ -189,7 +194,7 @@ h1 {
 	margin-top: 10px;
 }
 
-#countdown-number {
+#countdownNumber {
 	position: absolute;
 	top: 55px;
 	left: 55px;
