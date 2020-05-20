@@ -15,10 +15,9 @@
         <p>This site follows the 20-20-20 rule</p>
         <p>Every 20 minutes, look at something at least 20 feet away for 20 seconds</p>
         <div id="countdown">
-            <div id="countdownNumber"></div>
+            <div id="countdown-number"></div>
             <svg>
-                <title id="countdownTitle"></title>
-                <circle r="53" cx="75" cy="75"></circle>
+              <circle r="53" cx="75" cy="75"></circle>
             </svg>
         </div>
         <div id="notificationsOffMsg" class="hidden">
@@ -91,17 +90,6 @@
                 </label>
                 <label for="notificationsOff">
                     <input type="radio" id="notificationsOff" name="Notifications" value="off" onclick="handleNotificationsClick(false)">
-                    <span>Off</span>
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>Visual timer</legend>
-                <label for="timerOn">
-                    <input type="radio" id="timerOn" name="Timer" value="on" checked onclick="handleTimerClick(true)">
-                    <span>On</span>
-                </label>
-                <label for="timerOff">
-                    <input type="radio" id="timerOff" name="Timer" value="off" onclick="handleTimerClick(false)">
                     <span>Off</span>
                 </label>
             </fieldset>
