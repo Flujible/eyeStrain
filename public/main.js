@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  if (Notification.permission === "granted") {
+  if(Notification.permission === "granted") {
     togglePermissionButton(false);
   }
 
   requestPermission();
 
   setInterval(() => {
-    if (count < 2) {
+    if(count < 2) {
       count++
       breakAlert(true);
     } else {
@@ -36,19 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
       breakAlert(false);
     }
   }, breakInterval)
-
-  const countdownNumberEl = document.getElementById('countdown-number');
-  let countdown = breakInterval/60000;
-
-  countdownNumberEl.textContent = `${countdown}m`;
-
-  setInterval(function () {
-    countdown = --countdown <= 0 ? breakInterval/60000 : countdown;
-    countdownNumberEl.textContent = `${countdown}m`;
-  }, 60000);
 });
-
-
+   
+   
 const breakAlert = (mini) => {
   const timeoutLength = mini ? miniBreakDuration : breakDuration
 
@@ -112,7 +102,7 @@ const requestPermission = () => {
 }
 
 const requestPermissionBtn = () => {
-  if (Notification.permission === 'denied') {
+  if(Notification.permission === 'denied') {
     alert("Notifications have been blocked, you need to enable them in your browser settings");
   } else {
     requestPermission();
@@ -122,15 +112,15 @@ const requestPermissionBtn = () => {
 const togglePermissionButton = (show) => {
   const els = document.getElementsByClassName('notifications');
   if (show !== undefined) {
-    for (let el of els) {
-      if (show === true) {
-        el.classList.remove("hidden");
+    for(let el of els) {
+        if (show === true) {
+          el.classList.remove("hidden");
       } else {
         el.classList.add("hidden");
       }
     }
   } else {
-    for (let el of els) {
+    for(let el of els) {
       if (el.classList.value.includes("hidden")) {
         el.classList.remove("hidden");
       } else {
@@ -155,27 +145,27 @@ const togglePanel = (panel) => {
 
 const toggleBreakMessage = (mini, callback) => {
   const breakMsgContainerDiv = document.getElementById("breakMsgContainer") || document.getElementById("breakMsgContainerHidden");
-  if (breakMsgContainerDiv.id === "breakMsgContainer") {
+  if(breakMsgContainerDiv.id === "breakMsgContainer") {
     breakMsgContainerDiv.id = "breakMsgContainerHidden";
   } else if (overlayAllowed) {
     breakMsgContainerDiv.id = "breakMsgContainer"
   }
-  if (mini) {
+  if(mini) {
     const miniBreakMsgDiv = document.getElementById('miniBreakMsg');
-    if (miniBreakMsgDiv.classList.contains('hidden')) {
+    if(miniBreakMsgDiv.classList.contains('hidden')) {
       miniBreakMsgDiv.classList.remove('hidden');
     } else {
       miniBreakMsgDiv.classList.add('hidden');
     }
   } else {
     const breakMsgDiv = document.getElementById('breakMsg');
-    if (breakMsgDiv.classList.contains('hidden')) {
+    if(breakMsgDiv.classList.contains('hidden')) {
       breakMsgDiv.classList.remove('hidden');
     } else {
       breakMsgDiv.classList.add('hidden');
     }
   }
-  if (callback) {
+  if(callback) {
     callback();
   }
 }
