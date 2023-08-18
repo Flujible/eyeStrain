@@ -1,6 +1,6 @@
-# eyeStrain
+# Eye strain
 
-This is the repo for [Eyestrain](eyestrain.herokuapp.com), a site designed to try and keep your eyes healthy while you work.
+This is the repo for [Eyestrain](https://eyestrain.netlify.app/m), a site designed to try and keep your eyes healthy while you work.
 
 Staring at a screen for too long is bad for your eyes so its important to take regular breaks.
 
